@@ -1,0 +1,53 @@
+USE [C:\DEVELOPMENT\ELANCE\2008EXPRESS\FINANCE\FINANCE\FINANCE.MDF]
+GO
+/****** Object:  Table [dbo].[Symbol]    Script Date: 10/19/2012 23:58:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Symbol](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NULL,
+ CONSTRAINT [PK_Symbol] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Data]    Script Date: 10/19/2012 23:58:47 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Data](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[SymbolId] [int] NOT NULL,
+	[Name] [varchar](100) NULL,
+	[Date] [date] NULL,
+	[LTP] [decimal](18, 2) NULL,
+	[Time] [datetime] NULL,
+	[Volume] [decimal](18, 0) NULL,
+	[Ask] [decimal](18, 2) NULL,
+	[Bid] [decimal](18, 2) NULL,
+	[High] [decimal](18, 2) NULL,
+	[Low] [decimal](18, 2) NULL,
+ CONSTRAINT [PK_Data] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  ForeignKey [FK_Data_Data]    Script Date: 10/19/2012 23:58:47 ******/
+ALTER TABLE [dbo].[Data]  WITH CHECK ADD  CONSTRAINT [FK_Data_Data] FOREIGN KEY([SymbolId])
+REFERENCES [dbo].[Symbol] ([Id])
+GO
+ALTER TABLE [dbo].[Data] CHECK CONSTRAINT [FK_Data_Data]
+GO
